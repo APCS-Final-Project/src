@@ -4,3 +4,4 @@ http://crunchify.com/java-simple-qr-code-generator-example/
 
 http://www.journaldev.com/470/generate-qr-code-image-from-java-program
 
+we will have to convert all of the imported files to processing
