@@ -1,0 +1,6 @@
+useful links for Joseph and Ari
+
+http://crunchify.com/java-simple-qr-code-generator-example/
+
+http://www.journaldev.com/470/generate-qr-code-image-from-java-program
+
