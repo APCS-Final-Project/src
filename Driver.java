@@ -20,9 +20,9 @@ public class Driver extends PApplet {
         //nya.addARMarker("patt.kanji",80);//id=1
         //nya.addARMarker("/home/jake/Downloads/ARToolKit/bin/qr_corner.patt", 10);//id=0
         //for (int i = 0; i < numMarkers; i++) {
-        nya.addARMarker("/home/jake/Downloads/corner.pat", 40);
-        nya.addARMarker("/home/jake/Downloads/top_right.pat", 40);
-        nya.addARMarker("/home/jake/Downloads/bottom_left.pat", 40);
+        nya.addARMarker("./patterns/corner.pat", 40);
+        nya.addARMarker("./patterns/top_right.pat", 40);
+        nya.addARMarker("./patterns/bottom_left.pat", 40);
         //}
         //nya.addARMarker("patt.hiro", 40);
         nya.setConfidenceThreshold(0.3);
