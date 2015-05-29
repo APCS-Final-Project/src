@@ -24,7 +24,7 @@ public class GenerateQRCode {
     public static void main(String[] args) throws WriterException, IOException {
         String qrCodeText = "hi jake";
         String filePath = "QR.png";
-        int size = 125;
+        int size = 1000;
         String fileType = "png";
         File qrFile = new File(filePath);
         createQRImage(qrFile, qrCodeText, size, fileType);
@@ -34,8 +34,9 @@ public class GenerateQRCode {
     private static void createQRImage(File qrFile, String qrCodeText, int size,
             String fileType) throws WriterException, IOException {
         // Create the ByteMatrix for the QR-Code that encodes the given String
-        Hashtable<EncodeHintType,ErrorCorrectionLevel> hintMap = new Hashtable<EncodeHintType,ErrorCorrectionLevel>();
+        Hashtable<EncodeHintType,Object> hintMap = new Hashtable<EncodeHintType,Object>();
         hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
+        hintMap.put(EncodeHintType.MARGIN, 0);
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
         BitMatrix byteMatrix = qrCodeWriter.encode(qrCodeText,
                 BarcodeFormat.QR_CODE, size, size, hintMap);
