@@ -36,7 +36,7 @@ public class GenerateQRCode {
         // Create the ByteMatrix for the QR-Code that encodes the given String
         Hashtable<EncodeHintType,Object> hintMap = new Hashtable<EncodeHintType,Object>();
         hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
-        hintMap.put(EncodeHintType.MARGIN, 0);
+        hintMap.put(EncodeHintType.MARGIN, 5);
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
         BitMatrix byteMatrix = qrCodeWriter.encode(qrCodeText,
                 BarcodeFormat.QR_CODE, size, size, hintMap);
