@@ -37,18 +37,15 @@ public class Driver extends PApplet {
         nya.detect(cam);
         background(0);
         nya.drawBackground(cam);
-        Corner[] corners = new Corner[3];
         int cornerCount = 0;
         for (int i=0; i<numMarkers; i++) {
             if ((!nya.isExistMarker(i))) {
                 continue;
             }
-            corners[cornerCount] = new Corner(nya.getMarkerVertex2D(i), i);
             cornerCount++;
             if (cornerCount >= 3) break;
         }
         if (cornerCount >= 3) {
-            Corner.cornerInFront(corners);
             //println("before " + Arrays.toString(vertices));
             //println("after " + Arrays.toString(vertices));
             /*for (int j=0; j < vertices.length; j++) {
@@ -56,9 +53,8 @@ public class Driver extends PApplet {
                 rect(vertex.x, vertex.y, 10, 10);
                 text(j, vertex.x, vertex.y);
             }*/
-            for (int i = 0; i < corners.length; i++) {
-                Corner corner = corners[i];
-                nya.beginTransform(corner.markerId);
+            for (int i = 0; i < 3; i++) {
+                nya.beginTransform(i);
                 if (i == 0) {
                     fill(255, 0, 0);
                 } else {
