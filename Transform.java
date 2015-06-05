@@ -4,17 +4,11 @@ public class Transform {
     private final PVector a;
     private final PVector b;
     private final float det;
-    
+
     public Transform(PVector a, PVector b) {
         this.a = a.get();
         this.b = b.get();
         det = 1 / (a.x*b.y - a.y*b.x);
-    }
-
-    public Transform(PVector o, PVector a, PVector b) {
-        this(a, b);
-        a.sub(o);
-        b.sub(o);
     }
 
     public PVector transform(PVector p) {
