@@ -49,13 +49,22 @@ public class Driver extends PApplet {
                 rect(vertex.x, vertex.y, 10, 10);
                 text(j, vertex.x, vertex.y);
             }*/
-            ArrayList<PVector> vertexes = new ArrayList<PVector>();
+            /*ArrayList<PVector> vertexes = new ArrayList<PVector>();
             for (int i = 0 ; i < 3 ; i++) {
                 for (PVector aVertex : nya.getMarkerVertex2D(i)) {
                     vertexes.add(aVertex);
                 }
-            }
+            }*/
             for (int i = 0; i < 3; i++) {
+                PVector[] vertices = nya.getMarkerVertex2D(i);
+                // label corners in order
+                /*for (int j=0; j < vertices.length; j++) {
+                    PVector vertex = vertices[j];
+                    rect(vertex.x, vertex.y, 10, 10);
+                    text(j, vertex.x, vertex.y);
+                }*/
+
+                // draw boxes on top of markers
                 nya.beginTransform(i);
                 if (i == 0) {
                     fill(255, 0, 0);
@@ -67,20 +76,41 @@ public class Driver extends PApplet {
                 drawVertex(i);
                 nya.endTransform();
             }
+
+            /*int[] v = new int[8];
+            for (int i = 0; i < 3; i++) {
+                PVector vertex = nya.getMarkerVertex2D(i)[0];
+                v[2*i] = (int) vertex.x;
+                v[2*i + 1] = (int) vertex.y;
+            }
+            v[6] = v[2];
+            v[7] = v[5];
+            PImage pm = nya.pickupMarkerImage(
+                            0,
+                            v[0],
+                            v[1],
+                            v[2],
+                            v[3],
+                            v[4],
+                            v[5],
+                            v[6],
+                            v[7],
+                            500,
+                            500
+                        );*/
         }
     }
-    public void drawVertex(int id)
-    {
-      PFont font = createFont("FFScala", 32);
-      PVector[] i_v=nya.getMarkerVertex2D(id);
-      textFont(font,10f);
-      stroke(100,0,0);
-      for(int i=0;i<4;i++){
-        fill(100,0,0);
-        ellipse(i_v[i].x,i_v[i].y,6,6);
-        fill(0,0,0);
-        text(i + ", ("+i_v[i].x+","+i_v[i].y+")",i_v[i].x,i_v[i].y);
-      }
+    public void drawVertex(int id) {
+        PFont font = createFont("FFScala", 32);
+        PVector[] i_v=nya.getMarkerVertex2D(id);
+        textFont(font,10f);
+        stroke(100,0,0);
+        for(int i=0; i<4; i++) {
+            fill(100,0,0);
+            ellipse(i_v[i].x,i_v[i].y,6,6);
+            fill(0,0,0);
+            text(i + ", ("+i_v[i].x+","+i_v[i].y+")",i_v[i].x,i_v[i].y);
+        }
     }
 
     public static void main(String args[]) {
