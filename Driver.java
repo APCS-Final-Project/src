@@ -17,8 +17,8 @@ public class Driver extends PApplet {
         println(MultiMarker.VERSION);
         cam=new Capture(this, 640, 480);
         nya=new MultiMarker(this, width, height, "camera_para.dat", NyAR4PsgConfig.CONFIG_PSG);
-        nya.addARMarker("./patterns/top_right.pat", 40);
         nya.addARMarker("./patterns/corner.pat", 40);
+        nya.addARMarker("./patterns/top_right.pat", 40);
         nya.addARMarker("./patterns/bottom_left.pat", 40);
         nya.setConfidenceThreshold(0.3);
         cam.start();
@@ -38,7 +38,6 @@ public class Driver extends PApplet {
                 continue;
             }
             cornerCount++;
-            System.out.println("YAY");
             if (cornerCount >= 3) break;
         }
         if (cornerCount >= 3) {
@@ -58,14 +57,14 @@ public class Driver extends PApplet {
             for (int i = 0; i < 3; i++) {
                 PVector[] vertices = nya.getMarkerVertex2D(i);
                 // label corners in order
-                /*for (int j=0; j < vertices.length; j++) {
+                for (int j=0; j < vertices.length; j++) {
                     PVector vertex = vertices[j];
                     rect(vertex.x, vertex.y, 10, 10);
                     text(j, vertex.x, vertex.y);
-                }*/
+                }
 
                 // draw boxes on top of markers
-                nya.beginTransform(i);
+                /*nya.beginTransform(i);
                 if (i == 0) {
                     fill(255, 0, 0);
                 } else {
@@ -74,7 +73,7 @@ public class Driver extends PApplet {
                 translate(0,0,20);
                 box(40);
                 drawVertex(i);
-                nya.endTransform();
+                nya.endTransform();*/
             }
 
             /*int[] v = new int[8];
