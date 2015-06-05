@@ -2,6 +2,7 @@ import processing.core.*;
 import processing.video.*;
 import jp.nyatla.nyar4psg.*;
 import java.util.Arrays;
+import java.util.ArrayList;
 
 public class Driver extends PApplet {
 
@@ -16,15 +17,9 @@ public class Driver extends PApplet {
         println(MultiMarker.VERSION);
         cam=new Capture(this, 640, 480);
         nya=new MultiMarker(this, width, height, "camera_para.dat", NyAR4PsgConfig.CONFIG_PSG);
-        //nya.addARMarker("patt.hiro",80);//id=0
-        //nya.addARMarker("patt.kanji",80);//id=1
-        //nya.addARMarker("/home/jake/Downloads/ARToolKit/bin/qr_corner.patt", 10);//id=0
-        //for (int i = 0; i < numMarkers; i++) {
-        nya.addARMarker("./patterns/corner.pat", 40);
         nya.addARMarker("./patterns/top_right.pat", 40);
+        nya.addARMarker("./patterns/corner.pat", 40);
         nya.addARMarker("./patterns/bottom_left.pat", 40);
-        //}
-        //nya.addARMarker("patt.hiro", 40);
         nya.setConfidenceThreshold(0.3);
         cam.start();
     }
@@ -43,6 +38,7 @@ public class Driver extends PApplet {
                 continue;
             }
             cornerCount++;
+            System.out.println("YAY");
             if (cornerCount >= 3) break;
         }
         if (cornerCount >= 3) {
@@ -53,6 +49,12 @@ public class Driver extends PApplet {
                 rect(vertex.x, vertex.y, 10, 10);
                 text(j, vertex.x, vertex.y);
             }*/
+            ArrayList<PVector> vertexes = new ArrayList<PVector>();
+            for (int i = 0 ; i < 3 ; i++) {
+                for (PVector aVertex : nya.getMarkerVertex2D(i)) {
+                    vertexes.add(aVertex);
+                }
+            }
             for (int i = 0; i < 3; i++) {
                 nya.beginTransform(i);
                 if (i == 0) {
@@ -62,9 +64,23 @@ public class Driver extends PApplet {
                 }
                 translate(0,0,20);
                 box(40);
+                drawVertex(i);
                 nya.endTransform();
             }
         }
+    }
+    public void drawVertex(int id)
+    {
+      PFont font = createFont("FFScala", 32);
+      PVector[] i_v=nya.getMarkerVertex2D(id);
+      textFont(font,10f);
+      stroke(100,0,0);
+      for(int i=0;i<4;i++){
+        fill(100,0,0);
+        ellipse(i_v[i].x,i_v[i].y,6,6);
+        fill(0,0,0);
+        text(i + ", ("+i_v[i].x+","+i_v[i].y+")",i_v[i].x,i_v[i].y);
+      }
     }
 
     public static void main(String args[]) {
