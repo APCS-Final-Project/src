@@ -41,6 +41,8 @@ public class Driver extends PApplet {
             System.out.println("YAY");
             if (cornerCount >= 3) break;
         }
+
+        System.out.println("All 3 detected");
         if (cornerCount >= 3) {
             //println("before " + Arrays.toString(vertices));
             //println("after " + Arrays.toString(vertices));
