@@ -72,13 +72,13 @@ public class Driver extends PApplet {
             line(0, 0, centers[1].x, centers[1].y);
             line(0, 0, centers[2].x, centers[2].y);
 
-            PMatrix3D transformer = nya.getMarkerMatrix(0);
+            /*PMatrix3D transformer = nya.getMarkerMatrix(0);
             PVector topRight = null;
             topRight = transformer.mult(nya.getMarkerVertex2D(1)[1], topRight);
             PVector corner = null;
             corner = transformer.mult(nya.getMarkerVertex2D(0)[0], corner);
             PVector bottomLeft = null;
-            bottomLeft = transformer.mult(nya.getMarkerVertex2D(2)[3], bottomLeft);
+            bottomLeft = transformer.mult(nya.getMarkerVertex2D(2)[3], bottomLeft);*/
 
             for (int i = 0; i < 3; i++) {
                 PVector[] vertices = nya.getMarkerVertex2D(i);
