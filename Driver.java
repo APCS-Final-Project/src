@@ -41,7 +41,7 @@ public class Driver extends PApplet {
             if (cornerCount >= 3) break;
         }
 
-        System.out.println("All 3 detected");
+        //System.out.println("All 3 detected");
         if (cornerCount >= 3) {
             //println("before " + Arrays.toString(vertices));
             //println("after " + Arrays.toString(vertices));
@@ -68,8 +68,14 @@ public class Driver extends PApplet {
             //System.out.println(Arrays.toString(nya.getMarkerVertex2D(2)));
             //System.out.println(Arrays.toString(centers));
             Transform t = new Transform(centers[1], centers[2]);
+            fill(255, 0, 0);
             line(0, 0, centers[1].x, centers[1].y);
             line(0, 0, centers[2].x, centers[2].y);
+
+            PVector topRight = nya.getMarkerVertex2D(1)[1];
+            PVector corner = nya.getMarkerVertex2D(0)[0];
+            PVector bottomLeft = nya.getMarkerVertex2D(2)[3];
+
             for (int i = 0; i < 3; i++) {
                 PVector[] vertices = nya.getMarkerVertex2D(i);
                 for (PVector v : vertices) v.sub(o);
@@ -79,7 +85,7 @@ public class Driver extends PApplet {
                     PVector vertex = vertices[j];
                     PVector v = t.transform(vertex);
                     square(vertex, 10);
-                    text(j+coords(v), vertex.x, vertex.y);
+                    text(j+"  "+coords(v), vertex.x, vertex.y - 10);
                 }
 
                 // draw boxes on top of markers
@@ -94,6 +100,24 @@ public class Driver extends PApplet {
                 drawVertex(i);
                 nya.endTransform();*/
             }
+            translate(-o.x, -o.y);
+
+            //duct tapy fix
+            try {
+                PImage img = cam.get((int)corner.x - 10, (int)corner.y - 10,
+                        (int)topRight.x - (int)corner.x + 20,
+                        (int)bottomLeft.y - (int)corner.y + 20);
+
+                // still doesn't work
+    /*            PImage img = nya.pickupMarkerImage(0,
+                        (int)topRight.x, (int)topRight.y,
+                        (int)corner.x, (int)corner.y,
+                        (int)bottomLeft.x, (int)bottomLeft.y,
+                        (int)topRight.x, (int)bottomLeft.y,
+                        400, 400);*/
+
+                image(img, 0, 0, 300, 300);
+            }catch (Exception e) {}
 
             /*int[] v = new int[8];
             for (int i = 0; i < 3; i++) {
@@ -131,7 +155,7 @@ public class Driver extends PApplet {
         if (v.y > 0) y = '+';
         else if (v.y < 0) y = '-';
         else y = '0';
-        return "<"+x+","+y+">";
+        return " <"+x+","+y+"> ";
     }
 
     private static PVector center(PVector[] vs) {
