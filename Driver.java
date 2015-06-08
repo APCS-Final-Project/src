@@ -72,9 +72,13 @@ public class Driver extends PApplet {
             line(0, 0, centers[1].x, centers[1].y);
             line(0, 0, centers[2].x, centers[2].y);
 
-            PVector topRight = nya.getMarkerVertex2D(1)[1];
-            PVector corner = nya.getMarkerVertex2D(0)[0];
-            PVector bottomLeft = nya.getMarkerVertex2D(2)[3];
+            PMatrix3D transformer = nya.getMarkerMatrix(0);
+            PVector topRight = null;
+            topRight = transformer.mult(nya.getMarkerVertex2D(1)[1], topRight);
+            PVector corner = null;
+            corner = transformer.mult(nya.getMarkerVertex2D(0)[0], corner);
+            PVector bottomLeft = null;
+            bottomLeft = transformer.mult(nya.getMarkerVertex2D(2)[3], bottomLeft);
 
             for (int i = 0; i < 3; i++) {
                 PVector[] vertices = nya.getMarkerVertex2D(i);
@@ -104,20 +108,28 @@ public class Driver extends PApplet {
 
             //duct tapy fix
             try {
-                PImage img = cam.get((int)corner.x - 10, (int)corner.y - 10,
+                /*PImage img = cam.get((int)corner.x - 10, (int)corner.y - 10,
                         (int)topRight.x - (int)corner.x + 20,
-                        (int)bottomLeft.y - (int)corner.y + 20);
+                        (int)bottomLeft.y - (int)corner.y + 20);*/
 
                 // still doesn't work
-    /*            PImage img = nya.pickupMarkerImage(0,
+                /*PImage img = nya.pickupMarkerImage(0,
                         (int)topRight.x, (int)topRight.y,
                         (int)corner.x, (int)corner.y,
                         (int)bottomLeft.x, (int)bottomLeft.y,
                         (int)topRight.x, (int)bottomLeft.y,
                         400, 400);*/
+                
+                //YOLO
+                PImage img = nya.pickupMarkerImage(0,
+                        130, 40,
+                        -40, 40,
+                        -40, -130,
+                        130, -130,
+                        500, 500);
 
                 image(img, 0, 0, 300, 300);
-            }catch (Exception e) {}
+            }catch (Exception e) {e.printStackTrace();}
 
             /*int[] v = new int[8];
             for (int i = 0; i < 3; i++) {
