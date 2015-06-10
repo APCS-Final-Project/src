@@ -26,3 +26,4 @@ Change Date    |Commiter   |Description
 06-07|yw|finally fixed getting the correct qr image, moving on to decryption
 06-10|jw|added new code for making the pattern to cooperate with processing
 06-10|yw|new code for creating QR code finished
+06-10|yw|now Driver renders the decrypted message on top of the detected qr code
