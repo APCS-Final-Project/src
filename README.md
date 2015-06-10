@@ -11,7 +11,7 @@ wish to further develop this project by creating a system of augmented reality
 using QR codes as markers themselves.
 
 # Change Log
-Date    |Commiter   |Description
+Change Date    |Commiter   |Description
 --------|-----------|------------
 05-22|yw|created repository, split task --> marker recognition = jake + yicheng, encryption/decryption = ari + joseph
 05-27|jg|added links useful for encryption/decryption
