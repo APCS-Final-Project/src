@@ -3,6 +3,16 @@ import processing.video.*;
 import jp.nyatla.nyar4psg.*;
 import java.util.Arrays;
 import java.util.ArrayList;
+import com.google.zxing.*;
+import com.google.zxing.common.*;
+import com.google.zxing.qrcode.*;
+import com.google.zxing.qrcode.encoder.*;
+import java.io.*;
+import java.util.*;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
+
 
 public class Driver extends PApplet {
 
@@ -10,6 +20,7 @@ public class Driver extends PApplet {
 
     Capture cam;
     MultiMarker nya;
+    String resultStr = "";
 
     public void setup() {
         size(640, 480, P3D);
@@ -50,7 +61,35 @@ public class Driver extends PApplet {
                                                130, -120,
                                                500, 500);
 
-            image(img, 0, 0, 300, 300);
+            // uncomment for debug - yw
+            //image(img, 0, 0, 300, 300);
+
+            // decode code
+            BufferedImage QRCode = (BufferedImage)img.getNative();
+            BinaryBitmap bitmap = new BinaryBitmap(
+                new HybridBinarizer(
+                    new BufferedImageLuminanceSource(QRCode)
+                )
+            );
+
+            QRCodeReader reader = new QRCodeReader();
+
+            Result result = null;
+            try {
+                result = reader.decode(bitmap);
+                resultStr = result.getText();
+            } catch (ReaderException e) {}
+
+            System.out.println(resultStr);
+
+            // Superimpose text on marker
+            nya.beginTransform(0); // Use the plane of the corner
+            pushMatrix();
+            fill(0, 102, 153); // pretty blue :D
+            textSize(30);
+            text(resultStr, -90, -50);
+            popMatrix();
+            nya.endTransform();
         }
     }
 
