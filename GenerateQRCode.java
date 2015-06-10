@@ -39,10 +39,23 @@ public class GenerateQRCode extends PApplet {
       float x = 98;
       float codeSize = 450;
       float boxSize = 16f / 450 * codeSize;
-      float offset = 18f / 450 * codeSize;
+      float rightOffset = 18f / 450 * codeSize;
+      float bottomOffset = 2f / 450 * codeSize;
+      // Corner
       g.rect(x, x, boxSize, boxSize);
-      g.rect(codeSize - x + offset, x, boxSize, boxSize);
-      g.rect(x, codeSize - x, boxSize, boxSize);
+      g.rect(x + boxSize, x, boxSize, boxSize);
+      g.rect(x, x + boxSize, boxSize, boxSize);
+      
+      // top right
+      g.rect(codeSize - x + rightOffset - boxSize, x, boxSize, boxSize);
+      g.rect(codeSize - x + rightOffset, x, boxSize, boxSize);
+      g.rect(codeSize - x + rightOffset + boxSize, x + boxSize, boxSize, boxSize);
+
+      // bottom left
+      g.rect(x, codeSize - x + bottomOffset, boxSize, boxSize);
+      g.rect(x, codeSize - x + bottomOffset + boxSize, boxSize, boxSize);
+      g.rect(x, codeSize - x + bottomOffset - boxSize, boxSize, boxSize);
+      g.rect(x, codeSize - x + bottomOffset - 2 * boxSize, boxSize, boxSize);
       g.endDraw();
       return g;
     }
@@ -91,6 +104,6 @@ public class GenerateQRCode extends PApplet {
         try {
             img = createQRImage(text, 500);
         } catch (WriterException e) {}
-        PApplet.main(new String[] { "--present", "AddSquare" });
+        PApplet.main(new String[] { "--present", "GenerateQRCode" });
     } 
 }
