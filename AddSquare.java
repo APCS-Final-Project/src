@@ -1,4 +1,5 @@
 import processing.core.*;
+import java.util.Scanner;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -16,19 +17,16 @@ import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 public class AddSquare extends PApplet {
-    PImage img, out;
+    static PImage img, out;
+    static String text;
 
     public void setup() {
       //size(500, 500);
-      img = loadImage("/home/yicheng-wang/github/src/QR.png");
+      //img = loadImage("/home/yicheng-wang/github/src/QR.png");
       img.resize(500, 500);
       out = transform(img);
       out.save("./QR_supermod.png");
-    }
-
-    public void draw() {
-      //image(out, 0, 0);
-      //exit();
+      exit();
     }
 
     public PImage transform(PImage img) {
@@ -49,8 +47,7 @@ public class AddSquare extends PApplet {
       return g;
     }
 
-    private static PImage createQRImage(String qrCodeText, int size,
-            String fileType) throws WriterException, IOException {
+    private static PImage createQRImage(String qrCodeText, int size) throws WriterException {
         // Create the ByteMatrix for the QR-Code that encodes the given String
         Hashtable<EncodeHintType,Object> hintMap = new Hashtable<EncodeHintType,Object>();
         hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
@@ -77,12 +74,23 @@ public class AddSquare extends PApplet {
                 }
             }
         }
-        ImageIO.write(image, fileType, qrFile);
+
+        // Convert to PImage -- yeech
+        PImage out = new PImage(image.getWidth(), image.getHeight(), PConstants.ARGB);
+        image.getRGB(0, 0, out.width, out.height, out.pixels, 0, out.width);
+        out.updatePixels();
+        return out;
     }
 
 
 
     public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter what you want to encode please: ");
+        text = sc.nextLine();
+        try {
+            img = createQRImage(text, 500);
+        } catch (WriterException e) {}
         PApplet.main(new String[] { "--present", "AddSquare" });
     } 
 }
