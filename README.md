@@ -27,3 +27,5 @@ Change Date    |Commiter   |Description
 06-10|jw|added new code for making the pattern to cooperate with processing
 06-10|yw|new code for creating QR code finished
 06-10|yw|now Driver renders the decrypted message on top of the detected qr code, also minor fix on add square
+06-11|ah/jg/jw|text field completed, moving onto combining everything
+06-11|yw|box drawn on qr then draw text... life is good :D
