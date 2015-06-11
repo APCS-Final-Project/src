@@ -1,17 +1,32 @@
 /**
-* ControlP5 Textfield
-*
-*
-* find a list of public methods available for the Textfield Controller
-* at the bottom of this sketch.
-*
-* by Andreas Schlegel, 2012
-* www.sojamo.de/libraries/controlp5
-*
-*/
+ * ControlP5 Textfield
+ *
+ *
+ * find a list of public methods available for the Textfield Controller
+ * at the bottom of this sketch.
+ *
+ * by Andreas Schlegel, 2012
+ * www.sojamo.de/libraries/controlp5
+ *
+ */
 
 
 import controlP5.*;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.Hashtable;
+
+import javax.imageio.ImageIO;
+
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 ControlP5 cp5;
 Textarea myTextarea;
@@ -19,188 +34,127 @@ Textarea myTextarea;
 String textValue = "";
 
 void setup() {
-  size(1000,500);
-  
-  PFont font = createFont("arial",20);
-  
+  size(1000, 500);
+
+  PFont font = createFont("arial", 20);
+
   cp5 = new ControlP5(this);
-  
-  cp5.addTextfield("Enter text to encode")
-     .setPosition(10,50)
-     .setSize(400,50)
-     .setFont(font)
-     .setFocus(true)
-     .setColor(color(255,0,0))     
-     ;      
+
+  cp5.addTextfield("input")
+    .setPosition(10, 50)
+      .setSize(400, 50)
+        .setFont(font)
+          .setFocus(true)
+            .setColor(color(255, 0, 0))
+              ;      
 
   cp5.addButton("Enter")
-     .setValue(0)
-     .setPosition(500,50)
-     .setSize(100,50)
-     ; 
-     
+    .setValue(0)
+      .setPosition(500, 50)
+        .setSize(100, 50)
+          ; 
+
   textFont(font);
 }
 
 void draw() {
   background(0);
   fill(255);
-  String string = cp5.get(Textfield.class,"Enter text to encode").getText();
-  //text(cp5.get(Textfield.class,"Enter text to encode").getText(), 500,130);
+  String string = cp5.get(Textfield.class, "input").getText();
+  PImage img = imageText("Input text to create a code");
+  if (string.length() > 0) {
+    try {
+      img = transform(createQRImage(string, 500));
+    } 
+    catch (WriterException e) {
+    }
+  }
+  image(img, 0, 0);
+  // text(cp5.get(Textfield.class,"input").getText(), 500,130);
   //textAlign(LEFT,TOP);
 }
 
-void controlEvent(ControlEvent theEvent) {
-  if(theEvent.isAssignableFrom(Textfield.class)) {
-    println("controlEvent: accessing a string from controller '"
-            +theEvent.getName()+"': "
-            +theEvent.getStringValue()
-            );
+// public void input(String theText) {
+//   // automatically receives results from controller input
+//   //println("a textfield event for controller 'input' : "+theText);
+// }
+
+// class Listener implements ControlListener {
+//   void controlEvent(ControlEvent theEvent) {
+//     println(theEvent);
+//   }
+// }
+
+public PImage imageText(String text) {
+  PGraphics g = createGraphics(500, 500);
+  g.beginDraw();
+  g.text(text, 250, 250);
+  g.endDraw();
+  return g;
+}
+
+public PImage transform(PImage img) {
+  //applet.size(img.width, img.height);
+  PGraphics g = createGraphics(500, 500);
+  g.beginDraw();
+  g.noStroke();
+  g.image(img, 0, 0);
+  g.fill(000, 75);
+  float x = 98;
+  float codeSize = 450;
+  float boxSize = 16f / 450 * codeSize;
+  float rightOffset = 18f / 450 * codeSize;
+  float bottomOffset = 2f / 450 * codeSize;
+  // Corner
+  g.rect(x, x, boxSize, boxSize);
+  g.rect(x + boxSize, x, boxSize, boxSize);
+  g.rect(x, x + boxSize, boxSize, boxSize);
+
+  // top right
+  g.rect(codeSize - x + rightOffset - boxSize, x, boxSize, boxSize);
+  g.rect(codeSize - x + rightOffset, x, boxSize, boxSize);
+  g.rect(codeSize - x + rightOffset + boxSize, x + boxSize, boxSize, boxSize);
+
+  // bottom left
+  g.rect(x, codeSize - x + bottomOffset, boxSize, boxSize);
+  g.rect(x, codeSize - x + bottomOffset + boxSize, boxSize, boxSize);
+  g.rect(x, codeSize - x + bottomOffset - boxSize, boxSize, boxSize);
+  g.rect(x, codeSize - x + bottomOffset - 2 * boxSize, boxSize, boxSize);
+  g.endDraw();
+  return g;
+}
+
+private PImage createQRImage(String qrCodeText, int size) throws WriterException {
+  // Create the ByteMatrix for the QR-Code that encodes the given String
+  Hashtable<EncodeHintType, Object> hintMap = new Hashtable<EncodeHintType, Object>();
+  hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
+  hintMap.put(EncodeHintType.MARGIN, 5);
+  QRCodeWriter qrCodeWriter = new QRCodeWriter();
+  BitMatrix byteMatrix = qrCodeWriter.encode(qrCodeText, BarcodeFormat.QR_CODE, size, size, hintMap);
+  // Make the BufferedImage that are to hold the QRCode
+  int matrixWidth = byteMatrix.getWidth();
+  BufferedImage image = new BufferedImage(matrixWidth, matrixWidth, 
+  BufferedImage.TYPE_INT_RGB);
+  image.createGraphics();
+
+  Graphics2D graphics = (Graphics2D) image.getGraphics();
+  graphics.setColor(Color.WHITE);
+  graphics.fillRect(0, 0, matrixWidth, matrixWidth);
+  // Paint and save the image using the ByteMatrix
+  graphics.setColor(Color.BLACK);
+
+  for (int i = 0; i < matrixWidth; i++) {
+    for (int j = 0; j < matrixWidth; j++) {
+      if (byteMatrix.get(i, j)) {
+        graphics.fillRect(i, j, 1, 1);
+      }
+    }
   }
+
+  // Convert to PImage -- yeech
+  PImage out = new PImage(image.getWidth(), image.getHeight(), PConstants.ARGB);
+  image.getRGB(0, 0, out.width, out.height, out.pixels, 0, out.width);
+  out.updatePixels();
+  return out;
 }
 
-
-public void input(String theText) {
-  // automatically receives results from controller input
-  println("a textfield event for controller 'input' : "+theText);
-}
-
-
-
-
-/*
-a list of all methods available for the Textfield Controller
-use ControlP5.printPublicMethodsFor(Textfield.class);
-to print the following list into the console.
-
-You can find further details about class Textfield in the javadoc.
-
-Format:
-ClassName : returnType methodName(parameter type)
-
-controlP5.Textfield : String getText() 
-controlP5.Textfield : Textfield clear() 
-controlP5.Textfield : Textfield keepFocus(boolean) 
-controlP5.Textfield : Textfield setAutoClear(boolean) 
-controlP5.Textfield : Textfield setFocus(boolean) 
-controlP5.Textfield : Textfield setFont(ControlFont) 
-controlP5.Textfield : Textfield setFont(PFont) 
-controlP5.Textfield : Textfield setFont(int) 
-controlP5.Textfield : Textfield setText(String) 
-controlP5.Textfield : Textfield setValue(String) 
-controlP5.Textfield : Textfield setValue(float) 
-controlP5.Textfield : boolean isAutoClear() 
-controlP5.Textfield : int getIndex() 
-controlP5.Textfield : void draw(PApplet) 
-controlP5.Textfield : void keyEvent(KeyEvent) 
-controlP5.Textfield : void setInputFilter(int) 
-controlP5.Textfield : void setPasswordMode(boolean) 
-controlP5.Controller : CColor getColor() 
-controlP5.Controller : ControlBehavior getBehavior() 
-controlP5.Controller : ControlWindow getControlWindow() 
-controlP5.Controller : ControlWindow getWindow() 
-controlP5.Controller : ControllerProperty getProperty(String) 
-controlP5.Controller : ControllerProperty getProperty(String, String) 
-controlP5.Controller : Label getCaptionLabel() 
-controlP5.Controller : Label getValueLabel() 
-controlP5.Controller : List getControllerPlugList() 
-controlP5.Controller : PImage setImage(PImage) 
-controlP5.Controller : PImage setImage(PImage, int) 
-controlP5.Controller : PVector getAbsolutePosition() 
-controlP5.Controller : PVector getPosition() 
-controlP5.Controller : String getAddress() 
-controlP5.Controller : String getInfo() 
-controlP5.Controller : String getName() 
-controlP5.Controller : String getStringValue() 
-controlP5.Controller : String toString() 
-controlP5.Controller : Tab getTab() 
-controlP5.Controller : Textfield addCallback(CallbackListener) 
-controlP5.Controller : Textfield addListener(ControlListener) 
-controlP5.Controller : Textfield bringToFront() 
-controlP5.Controller : Textfield bringToFront(ControllerInterface) 
-controlP5.Controller : Textfield hide() 
-controlP5.Controller : Textfield linebreak() 
-controlP5.Controller : Textfield listen(boolean) 
-controlP5.Controller : Textfield lock() 
-controlP5.Controller : Textfield plugTo(Object) 
-controlP5.Controller : Textfield plugTo(Object, String) 
-controlP5.Controller : Textfield plugTo(Object[]) 
-controlP5.Controller : Textfield plugTo(Object[], String) 
-controlP5.Controller : Textfield registerProperty(String) 
-controlP5.Controller : Textfield registerProperty(String, String) 
-controlP5.Controller : Textfield registerTooltip(String) 
-controlP5.Controller : Textfield removeBehavior() 
-controlP5.Controller : Textfield removeCallback() 
-controlP5.Controller : Textfield removeCallback(CallbackListener) 
-controlP5.Controller : Textfield removeListener(ControlListener) 
-controlP5.Controller : Textfield removeProperty(String) 
-controlP5.Controller : Textfield removeProperty(String, String) 
-controlP5.Controller : Textfield setArrayValue(float[]) 
-controlP5.Controller : Textfield setArrayValue(int, float) 
-controlP5.Controller : Textfield setBehavior(ControlBehavior) 
-controlP5.Controller : Textfield setBroadcast(boolean) 
-controlP5.Controller : Textfield setCaptionLabel(String) 
-controlP5.Controller : Textfield setColor(CColor) 
-controlP5.Controller : Textfield setColorActive(int) 
-controlP5.Controller : Textfield setColorBackground(int) 
-controlP5.Controller : Textfield setColorCaptionLabel(int) 
-controlP5.Controller : Textfield setColorForeground(int) 
-controlP5.Controller : Textfield setColorValueLabel(int) 
-controlP5.Controller : Textfield setDecimalPrecision(int) 
-controlP5.Controller : Textfield setDefaultValue(float) 
-controlP5.Controller : Textfield setHeight(int) 
-controlP5.Controller : Textfield setId(int) 
-controlP5.Controller : Textfield setImages(PImage, PImage, PImage) 
-controlP5.Controller : Textfield setImages(PImage, PImage, PImage, PImage) 
-controlP5.Controller : Textfield setLabelVisible(boolean) 
-controlP5.Controller : Textfield setLock(boolean) 
-controlP5.Controller : Textfield setMax(float) 
-controlP5.Controller : Textfield setMin(float) 
-controlP5.Controller : Textfield setMouseOver(boolean) 
-controlP5.Controller : Textfield setMoveable(boolean) 
-controlP5.Controller : Textfield setPosition(PVector) 
-controlP5.Controller : Textfield setPosition(float, float) 
-controlP5.Controller : Textfield setSize(PImage) 
-controlP5.Controller : Textfield setSize(int, int) 
-controlP5.Controller : Textfield setStringValue(String) 
-controlP5.Controller : Textfield setUpdate(boolean) 
-controlP5.Controller : Textfield setValueLabel(String) 
-controlP5.Controller : Textfield setView(ControllerView) 
-controlP5.Controller : Textfield setVisible(boolean) 
-controlP5.Controller : Textfield setWidth(int) 
-controlP5.Controller : Textfield show() 
-controlP5.Controller : Textfield unlock() 
-controlP5.Controller : Textfield unplugFrom(Object) 
-controlP5.Controller : Textfield unplugFrom(Object[]) 
-controlP5.Controller : Textfield unregisterTooltip() 
-controlP5.Controller : Textfield update() 
-controlP5.Controller : Textfield updateSize() 
-controlP5.Controller : boolean isActive() 
-controlP5.Controller : boolean isBroadcast() 
-controlP5.Controller : boolean isInside() 
-controlP5.Controller : boolean isLabelVisible() 
-controlP5.Controller : boolean isListening() 
-controlP5.Controller : boolean isLock() 
-controlP5.Controller : boolean isMouseOver() 
-controlP5.Controller : boolean isMousePressed() 
-controlP5.Controller : boolean isMoveable() 
-controlP5.Controller : boolean isUpdate() 
-controlP5.Controller : boolean isVisible() 
-controlP5.Controller : float getArrayValue(int) 
-controlP5.Controller : float getDefaultValue() 
-controlP5.Controller : float getMax() 
-controlP5.Controller : float getMin() 
-controlP5.Controller : float getValue() 
-controlP5.Controller : float[] getArrayValue() 
-controlP5.Controller : int getDecimalPrecision() 
-controlP5.Controller : int getHeight() 
-controlP5.Controller : int getId() 
-controlP5.Controller : int getWidth() 
-controlP5.Controller : int listenerSize() 
-controlP5.Controller : void remove() 
-controlP5.Controller : void setView(ControllerView, int) 
-java.lang.Object : String toString() 
-java.lang.Object : boolean equals(Object) 
-
-
-*/
