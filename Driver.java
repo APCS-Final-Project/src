@@ -85,9 +85,16 @@ public class Driver extends PApplet {
             // Superimpose text on marker
             nya.beginTransform(0); // Use the plane of the corner
             pushMatrix();
+            rotate(PI);
             fill(0, 102, 153); // pretty blue :D
-            textSize(30);
-            text(resultStr, -90, -50);
+            stroke(255, 200, 0);
+            translate(40, 40, 65);
+            box(130);
+            fill(0);
+            textSize(21);
+            translate(0, 0, 66);
+            text(resultStr, -50, -30, 130, 130);
+            translate(0, 0, -131);
             popMatrix();
             nya.endTransform();
         }
