@@ -31,7 +31,7 @@ public class Driver extends PApplet {
         nya.addARMarker("./patterns/corner.pat", 40);
         nya.addARMarker("./patterns/top_right.pat", 40);
         nya.addARMarker("./patterns/bottom_left.pat", 40);
-        nya.setConfidenceThreshold(0.3);
+        nya.setConfidenceThreshold(0.5);
         cam.start();
     }
 
@@ -88,15 +88,18 @@ public class Driver extends PApplet {
             rotate(PI);
             fill(0, 102, 153); // pretty blue :D
             stroke(255, 200, 0);
-            translate(40, 40, 65);
-            box(130);
+            translate(40, 40, 20);
+            box(130, 130, 40);
             fill(0);
             textSize(21);
-            translate(0, 0, 66);
+            translate(0, 0, 21);
             text(resultStr, -50, -30, 130, 130);
-            translate(0, 0, -131);
+            translate(-40, -40, -41);
             popMatrix();
             nya.endTransform();
+        }
+        else {
+            resultStr = "";
         }
     }
 
