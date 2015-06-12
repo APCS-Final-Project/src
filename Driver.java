@@ -31,7 +31,7 @@ public class Driver extends PApplet {
         nya.addARMarker("./patterns/corner.pat", 40);
         nya.addARMarker("./patterns/top_right.pat", 40);
         nya.addARMarker("./patterns/bottom_left.pat", 40);
-        nya.setConfidenceThreshold(0.5);
+        nya.setConfidenceThreshold(0.3);
         cam.start();
     }
 
