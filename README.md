@@ -10,6 +10,18 @@ course, NyARToolkit is capable of much more than simply recognizing markers. We
 wish to further develop this project by creating a system of augmented reality
 using QR codes as markers themselves.
 
+The project has two main parts, the scanner/render of QR codes (developped
+mostly by Yicheng and Jake) and the generator of QR codes (developped mostly by
+Ari and Joseph).
+
+# Instruction to Run
+
+This project comes with all the libraries that it needs in the lib folder. To
+compile the codes, one simply run "compile.sh."
+
+Afterwards, to launch the GUI that creates QR codes, one run "createQR.sh" and
+to use the scanner to scan QR codes one use "runScanner.sh". Have fun :D
+
 # Change Log
 Change Date    |Commiter   |Description
 --------|-----------|------------
@@ -29,3 +41,4 @@ Change Date    |Commiter   |Description
 06-10|yw|now Driver renders the decrypted message on top of the detected qr code, also minor fix on add square
 06-11|ah/jg/jw|text field completed, moving onto combining everything
 06-11|yw|box drawn on qr then draw text... life is good :D
+06-11|yw|finished GUI... Looks wonderful...
