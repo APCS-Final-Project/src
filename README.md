@@ -53,6 +53,8 @@ Change Date    |Commiter   |Description
 06-11|yw|box drawn on qr then draw text... life is good :D
 06-11|yw|finished GUI... Looks wonderful...
 06-13|yw|bug fix - gui/recognition of version 2-3 markers added
+06-14|jw|bug fix - text positioning fixed with new marker file
+06-14|yw|bug fix - new pattern gray square addition code fixed
 
 # Known Bugs
 * [x] cannot make version 2/3 qr codes

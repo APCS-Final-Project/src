@@ -58,12 +58,12 @@ public class Driver extends PApplet {
             PImage img = nya.pickupMarkerImage(0,
                                                -180, -50,
                                                40, -50,
-                                               40, 140,
-                                               -180, 140,
+                                               40, 160,
+                                               -180, 160,
                                                500, 500);
 
             // uncomment for debug - yw
-            //image(img, 0, 0, 300, 300);
+            image(img, 0, 0, 300, 300);
 
             // decode code
             BufferedImage QRCode = (BufferedImage)img.getNative();

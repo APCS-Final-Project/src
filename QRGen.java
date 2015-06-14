@@ -177,17 +177,18 @@ public PImage transform(PImage img) {
   float rightOffset = 18f;
   float bottomOffset = 2f;
   if (img.get((int)(x + 3 * boxSize / 4), (int)(x + 3 * boxSize / 4)) == color(0, 0, 0)) {
-      x = 88f;
-      boxSize = 15f;
-      rightOffset = 20f;
-      bottomOffset = 5f;
+      x = 89f;
+      boxSize = 14f;
+      rightOffset = 22f;
+      bottomOffset = 8f;
       if (img.get((int)(x + 9 * boxSize / 10), (int)(x + 9 * boxSize / 10)) == color(0, 0, 0)) {
           x = 88f;
-          boxSize = 13f;
-          rightOffset = 25f;
-          bottomOffset = 12f;
+          boxSize = 12f;
+          rightOffset = 26f;
+          bottomOffset = 14f;
       }
   }
+  // corner
   g.rect(x + boxSize, x, boxSize, boxSize);
   g.rect(x + 3*boxSize, x, boxSize, boxSize);
   g.rect(x, x + boxSize, boxSize, boxSize);
