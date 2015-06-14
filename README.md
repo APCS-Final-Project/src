@@ -12,25 +12,25 @@ Jake W.
 Yicheng W.
 
 # Introduction
-In this project, we create a QR code generator and scanner with the help of
+For our project, we created a QR code generator and scanner with the help of
 [zebra crossing] (https://github.com/zxing/zxing) and [NyARToolkit]
-(http://nyatla.jp/nyartoolkit/wp/). We use NyARToolkit's marker recognition
+(http://nyatla.jp/nyartoolkit/wp/). We used NyARToolkit's marker recognition
 system to identify certain QR codes and decrypt them using zebra crossing. Of
 course, NyARToolkit is capable of much more than simply recognizing markers. We
-wish to further develop this project by creating a system of augmented reality
+wished to further develop this project by creating a system of augmented reality
 using QR codes as markers themselves.
 
-The project has two main parts, the scanner/render of QR codes (developped
+The project has two main parts, the scanner/renderer of QR codes (developed
 mostly by Yicheng and Jake) and the generator of QR codes (developped mostly by
 Ari and Joseph).
 
-# Instruction to Run
+# Instructions to Run
 
 This project comes with all the libraries that it needs in the lib folder. To
-compile the codes, one simply run "compile.sh."
+compile the code, one simply runs "compile.sh."
 
-Afterwards, to launch the GUI that creates QR codes, one run "createQR.sh" and
-to use the scanner to scan QR codes one use "runScanner.sh". Have fun :D
+Afterwards, to launch the GUI that creates QR codes, run "createQR.sh" or to
+use the scanner to scan QR codes use "runScanner.sh". Have fun :D
 
 # Change Log
 Change Date    |Commiter   |Description
