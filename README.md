@@ -57,11 +57,13 @@ Change Date    |Commiter   |Description
 06-13|yw|bug fix - gui/recognition of version 2-3 markers added
 06-14|jw|bug fix - text positioning fixed with new marker file
 06-14|yw|bug fix - new pattern gray square addition code fixed
+06-14|yw|bug fix - updated ControlP5 library...
 
 # Known Bugs
 * [x] cannot make version 2/3 qr codes
 * [x] text positioning can sometimes be orthogonally rotated
-* [ ] createQR breaks when the input exceeds the limit of the box
+* [x] createQR breaks when the input exceeds the limit of the box
+* [ ] cannot make qr codes for versions > 3
 * [ ] text square doesn't cover the entire qr code for larger codes
 * [ ] poor pattern recognition under poor lighting
 * [ ] incompatible with multiple markers
