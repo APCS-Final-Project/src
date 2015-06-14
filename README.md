@@ -59,3 +59,9 @@ Change Date    |Commiter   |Description
 * [ ] text positioning can sometimes be orthogonally rotated
 * [ ] poor pattern recognition under poor lighting
 * [ ] incompatible with multiple markers
+
+# Source Cited
+- Built with [processing] (https://github.com/processing/processing)
+- Encryption/decryption done with [zxing] (https://github.com/zxing/zxing)
+- Pattern recognition with [NyARToolkit] (http://nyatla.jp/nyartoolkit/wp/)
+- GUI built with [controlP5] (https://github.com/sojamo/controlp5)
