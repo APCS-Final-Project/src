@@ -55,10 +55,10 @@ public class Driver extends PApplet {
         //System.out.println("All 3 detected");
         if (cornerCount >= 3) {
             PImage img = nya.pickupMarkerImage(0,
-                                               130, 50,
+                                               180, 50,
                                                -40, 50,
-                                               -40, -120,
-                                               130, -120,
+                                               -40, -160,
+                                               180, -160,
                                                500, 500);
 
             // uncomment for debug - yw
@@ -93,7 +93,7 @@ public class Driver extends PApplet {
             fill(0);
             textSize(21);
             translate(0, 0, 21);
-            text(resultStr, -50, -30, 130, 130);
+            text(resultStr, -50, -50, 130, 130);
             translate(-40, -40, -41);
             popMatrix();
             nya.endTransform();

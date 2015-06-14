@@ -191,10 +191,21 @@ public PImage transform(PImage img) {
   float x = 98f;
   float codeSize = 450f; // FIXME this need to be fixed, bigger QR code need bigger codesize
   //println(codeSize);
-  float boxSize = 16f / 450 * codeSize;
-  float rightOffset = 18f / 450 * codeSize;
-  float bottomOffset = 2f / 450 * codeSize;
-  // Corner
+  float boxSize = 16f;
+  float rightOffset = 18f;
+  float bottomOffset = 2f;
+  if (img.get((int)(x + 3 * boxSize / 4), (int)(x + 3 * boxSize / 4)) == color(0, 0, 0)) {
+      x = 88f;
+      boxSize = 15f;
+      rightOffset = 20f;
+      bottomOffset = 5f;
+      if (img.get((int)(x + 9 * boxSize / 10), (int)(x + 9 * boxSize / 10)) == color(0, 0, 0)) {
+          x = 88f;
+          boxSize = 13f;
+          rightOffset = 25f;
+          bottomOffset = 12f;
+      }
+  }
   g.rect(x, x, boxSize, boxSize);
   g.rect(x + boxSize, x, boxSize, boxSize);
   g.rect(x, x + boxSize, boxSize, boxSize);
@@ -209,6 +220,7 @@ public PImage transform(PImage img) {
   g.rect(x, codeSize - x + bottomOffset + boxSize, boxSize, boxSize);
   g.rect(x, codeSize - x + bottomOffset - boxSize, boxSize, boxSize);
   g.rect(x, codeSize - x + bottomOffset - 2 * boxSize, boxSize, boxSize);
+
   g.endDraw();
   return g;
 }

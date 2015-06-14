@@ -1,5 +1,15 @@
 # src
-Source Code for <Insert Name> Project
+Source Code for Some-Awesome-Name Project
+
+Written by (in alphabetical order by last name):
+
+Ari H.
+
+Joseph G.
+
+Jake W.
+
+Yicheng W.
 
 # Introduction
 In this project, we create a QR code generator and scanner with the help of
@@ -42,3 +52,10 @@ Change Date    |Commiter   |Description
 06-11|ah/jg/jw|text field completed, moving onto combining everything
 06-11|yw|box drawn on qr then draw text... life is good :D
 06-11|yw|finished GUI... Looks wonderful...
+06-13|yw|bug fix - gui/recognition of version 2-3 markers added
+
+# Known Bugs
+[x] - cannot make version 2/3 qr codes
+[ ] - text positioning can sometimes be orthogonally rotated
+[ ] - poor pattern recognition under poor lighting
+[ ] - incompatible with multiple markers
