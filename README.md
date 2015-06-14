@@ -60,7 +60,7 @@ Change Date    |Commiter   |Description
 * [ ] poor pattern recognition under poor lighting
 * [ ] incompatible with multiple markers
 
-# Source Cited
+# Sources Cited
 - Built with [processing] (https://github.com/processing/processing)
 - Encryption/decryption done with [zxing] (https://github.com/zxing/zxing)
 - Pattern recognition with [NyARToolkit] (http://nyatla.jp/nyartoolkit/wp/)
