@@ -28,10 +28,11 @@ public class Driver extends PApplet {
         println(MultiMarker.VERSION);
         cam=new Capture(this, 640, 480);
         nya=new MultiMarker(this, width, height, "camera_para.dat", NyAR4PsgConfig.CONFIG_PSG);
-        nya.addARMarker("./patterns/corner.pat", 40);
+        //nya.addARMarker("./patterns/corner.pat", 40);
+        nya.addNyIdMarker(511, 40);
         nya.addARMarker("./patterns/top_right.pat", 40);
         nya.addARMarker("./patterns/bottom_left.pat", 40);
-        nya.setConfidenceThreshold(0.3);
+        //nya.setConfidenceThreshold(0.7);
         cam.start();
     }
 
@@ -55,10 +56,10 @@ public class Driver extends PApplet {
         //System.out.println("All 3 detected");
         if (cornerCount >= 3) {
             PImage img = nya.pickupMarkerImage(0,
-                                               180, 50,
-                                               -40, 50,
-                                               -40, -160,
-                                               180, -160,
+                                               -180, -50,
+                                               40, -50,
+                                               40, 140,
+                                               -180, 140,
                                                500, 500);
 
             // uncomment for debug - yw
@@ -80,12 +81,12 @@ public class Driver extends PApplet {
                 resultStr = result.getText();
             } catch (ReaderException e) {}
 
-            System.out.println(resultStr);
+            //System.out.println(resultStr);
 
             // Superimpose text on marker
             nya.beginTransform(0); // Use the plane of the corner
             pushMatrix();
-            rotate(PI);
+            //rotate(PI);
             fill(0, 102, 153); // pretty blue :D
             stroke(255, 200, 0);
             translate(40, 40, 20);

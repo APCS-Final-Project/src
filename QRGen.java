@@ -1,65 +1,65 @@
-import processing.core.*; 
-import processing.data.*; 
-import processing.event.*; 
-import processing.opengl.*; 
+import processing.core.*;
+import processing.data.*;
+import processing.event.*;
+import processing.opengl.*;
 
-import controlP5.*; 
-import java.awt.Color; 
-import java.awt.Graphics2D; 
-import java.awt.image.BufferedImage; 
-import java.io.File; 
-import java.io.IOException; 
-import java.util.Hashtable; 
-import javax.imageio.ImageIO; 
-import javax.swing.JFileChooser; 
-import com.google.zxing.BarcodeFormat; 
-import com.google.zxing.EncodeHintType; 
-import com.google.zxing.WriterException; 
-import com.google.zxing.common.BitMatrix; 
-import com.google.zxing.qrcode.QRCodeWriter; 
-import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel; 
+import controlP5.*;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.Hashtable;
+import javax.imageio.ImageIO;
+import javax.swing.JFileChooser;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
-import com.google.zxing.datamatrix.encoder.*; 
-import com.google.zxing.common.detector.*; 
-import com.google.zxing.oned.rss.*; 
-import com.google.zxing.oned.rss.expanded.decoders.*; 
-import com.google.zxing.*; 
-import com.google.zxing.client.result.*; 
-import com.google.zxing.pdf417.detector.*; 
-import com.google.zxing.qrcode.detector.*; 
-import com.google.zxing.maxicode.*; 
-import com.google.zxing.pdf417.decoder.ec.*; 
-import com.google.zxing.pdf417.*; 
-import com.google.zxing.datamatrix.*; 
-import com.google.zxing.aztec.*; 
-import com.google.zxing.pdf417.decoder.*; 
-import com.google.zxing.maxicode.decoder.*; 
-import com.google.zxing.oned.rss.expanded.*; 
-import com.google.zxing.oned.*; 
-import com.google.zxing.common.*; 
-import com.google.zxing.pdf417.encoder.*; 
-import com.google.zxing.common.reedsolomon.*; 
-import com.google.zxing.multi.qrcode.*; 
-import com.google.zxing.multi.*; 
-import com.google.zxing.qrcode.*; 
-import com.google.zxing.aztec.decoder.*; 
-import com.google.zxing.qrcode.decoder.*; 
-import com.google.zxing.aztec.detector.*; 
-import com.google.zxing.aztec.encoder.*; 
-import com.google.zxing.multi.qrcode.detector.*; 
-import com.google.zxing.qrcode.encoder.*; 
-import com.google.zxing.datamatrix.decoder.*; 
-import controlP5.*; 
-import com.google.zxing.datamatrix.detector.*; 
+import com.google.zxing.datamatrix.encoder.*;
+import com.google.zxing.common.detector.*;
+import com.google.zxing.oned.rss.*;
+import com.google.zxing.oned.rss.expanded.decoders.*;
+import com.google.zxing.*;
+import com.google.zxing.client.result.*;
+import com.google.zxing.pdf417.detector.*;
+import com.google.zxing.qrcode.detector.*;
+import com.google.zxing.maxicode.*;
+import com.google.zxing.pdf417.decoder.ec.*;
+import com.google.zxing.pdf417.*;
+import com.google.zxing.datamatrix.*;
+import com.google.zxing.aztec.*;
+import com.google.zxing.pdf417.decoder.*;
+import com.google.zxing.maxicode.decoder.*;
+import com.google.zxing.oned.rss.expanded.*;
+import com.google.zxing.oned.*;
+import com.google.zxing.common.*;
+import com.google.zxing.pdf417.encoder.*;
+import com.google.zxing.common.reedsolomon.*;
+import com.google.zxing.multi.qrcode.*;
+import com.google.zxing.multi.*;
+import com.google.zxing.qrcode.*;
+import com.google.zxing.aztec.decoder.*;
+import com.google.zxing.qrcode.decoder.*;
+import com.google.zxing.aztec.detector.*;
+import com.google.zxing.aztec.encoder.*;
+import com.google.zxing.multi.qrcode.detector.*;
+import com.google.zxing.qrcode.encoder.*;
+import com.google.zxing.datamatrix.decoder.*;
+import controlP5.*;
+import com.google.zxing.datamatrix.detector.*;
 
-import java.util.HashMap; 
-import java.util.ArrayList; 
-import java.io.File; 
-import java.io.BufferedReader; 
-import java.io.PrintWriter; 
-import java.io.InputStream; 
-import java.io.OutputStream; 
-import java.io.IOException; 
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.io.File;
+import java.io.BufferedReader;
+import java.io.PrintWriter;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.IOException;
 
 public class QRGen extends PApplet {
 
@@ -74,25 +74,6 @@ public class QRGen extends PApplet {
  * www.sojamo.de/libraries/controlp5
  *
  */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ControlP5 cp5;
 Textarea myTextarea;
@@ -110,20 +91,21 @@ public void setup() {
 
   cp5.addTextfield("input")
     .setPosition(50, 70)
-      .setSize(400, 30)
-        .setFont(font)
-          .setFocus(true)
-            .setColor(color(255, 0, 0))
-              ;      
+    .setSize(400, 30)
+    .setFont(font)
+    .setFocus(true)
+    .setColor(color(255, 0, 0))
+    ;
 
   cp5.addButton("Save")
     .setPosition(120, 110)
-      .setSize(100, 50)
-        ;
+    .setSize(100, 50)
+    ;
 
   cp5.addButton("Exit")
     .setPosition(310, 110)
-      .setSize(100, 50);
+    .setSize(100, 50)
+    ;
 
   textFont(font);
 }
@@ -187,9 +169,9 @@ public PImage transform(PImage img) {
   g.beginDraw();
   g.noStroke();
   g.image(img, 0, 0);
-  g.fill(000, 75);
+  g.fill(000, 150);
   float x = 98f;
-  float codeSize = 450f; // FIXME this need to be fixed, bigger QR code need bigger codesize
+  float codeSize = 450f;
   //println(codeSize);
   float boxSize = 16f;
   float rightOffset = 18f;
@@ -206,9 +188,11 @@ public PImage transform(PImage img) {
           bottomOffset = 12f;
       }
   }
-  g.rect(x, x, boxSize, boxSize);
   g.rect(x + boxSize, x, boxSize, boxSize);
+  g.rect(x + 3*boxSize, x, boxSize, boxSize);
   g.rect(x, x + boxSize, boxSize, boxSize);
+  g.rect(x + 4*boxSize, x + boxSize, boxSize, boxSize);
+  g.rect(x + 4*boxSize, x + 3*boxSize, boxSize, boxSize);
 
   // top right
   g.rect(codeSize - x + rightOffset - boxSize, x, boxSize, boxSize);

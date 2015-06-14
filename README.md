@@ -56,7 +56,7 @@ Change Date    |Commiter   |Description
 
 # Known Bugs
 * [x] cannot make version 2/3 qr codes
-* [ ] text positioning can sometimes be orthogonally rotated
+* [x] text positioning can sometimes be orthogonally rotated
 * [ ] poor pattern recognition under poor lighting
 * [ ] incompatible with multiple markers
 
