@@ -29,8 +29,10 @@ Ari and Joseph).
 This project comes with all the libraries that it needs in the lib folder. To
 compile the code, one simply runs "compile.sh."
 
-Afterwards, to launch the GUI that creates QR codes, run "createQR.sh" or to
-use the scanner to scan QR codes use "runScanner.sh". Have fun :D
+Afterwards, to launch the GUI that creates QR codes, run "createQR.sh," then you
+can either print out those codes or put them on a phone or any mobile device.
+
+To use the scanner to scan and render QR codes, simply use "runScanner.sh". Have fun :D
 
 # Change Log
 Change Date    |Commiter   |Description
