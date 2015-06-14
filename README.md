@@ -55,7 +55,7 @@ Change Date    |Commiter   |Description
 06-13|yw|bug fix - gui/recognition of version 2-3 markers added
 
 # Known Bugs
-[x] - cannot make version 2/3 qr codes
-[ ] - text positioning can sometimes be orthogonally rotated
-[ ] - poor pattern recognition under poor lighting
-[ ] - incompatible with multiple markers
+* [x] cannot make version 2/3 qr codes
+* [ ] text positioning can sometimes be orthogonally rotated
+* [ ] poor pattern recognition under poor lighting
+* [ ] incompatible with multiple markers
