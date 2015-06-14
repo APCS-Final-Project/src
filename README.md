@@ -61,6 +61,7 @@ Change Date    |Commiter   |Description
 # Known Bugs
 * [x] cannot make version 2/3 qr codes
 * [x] text positioning can sometimes be orthogonally rotated
+* [ ] createQR breaks when the input exceeds the limit of the box
 * [ ] text square doesn't cover the entire qr code for larger codes
 * [ ] poor pattern recognition under poor lighting
 * [ ] incompatible with multiple markers

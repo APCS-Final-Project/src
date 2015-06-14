@@ -122,7 +122,7 @@ public void draw() {
     try {
       QRImg = transform(createQRImage(string, 500));
     }
-    catch (WriterException e) {
+    catch (Exception e) {
     }
   }
   image(QRImg, 0, 180);
