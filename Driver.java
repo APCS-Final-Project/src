@@ -63,7 +63,7 @@ public class Driver extends PApplet {
                                                500, 500);
 
             // uncomment for debug - yw
-            image(img, 0, 0, 300, 300);
+            //image(img, 0, 0, 300, 300);
 
             // decode code
             BufferedImage QRCode = (BufferedImage)img.getNative();
