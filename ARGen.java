@@ -61,7 +61,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.IOException;
 
-public class QRGen extends PApplet {
+public class ARGen extends PApplet {
 
 /**
  * ControlP5 Textfield
@@ -115,7 +115,7 @@ public void draw() {
   fill(255);
   PFont title = createFont("arial", 50);
   textFont(title);
-  text("<INSERT NAME>", 50, 60);
+  text("AR Code Generator", 30, 60);
   String string = cp5.get(Textfield.class, "input").getText();
   QRImg = imageText("Input text to create a code");
   if (string.length() > 0) {
@@ -245,7 +245,7 @@ private PImage createQRImage(String qrCodeText, int size) throws WriterException
 }
 
   static public void main(String[] passedArgs) {
-    String[] appletArgs = new String[] { "QRGen" };
+    String[] appletArgs = new String[] { "ARGen" };
     if (passedArgs != null) {
       PApplet.main(concat(appletArgs, passedArgs));
     } else {

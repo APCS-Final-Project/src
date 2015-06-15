@@ -1,5 +1,5 @@
 # src
-Source Code for Some-Awesome-Name Project
+Source Code for AR Promposer Project
 
 Written by (in alphabetical order by last name):
 
@@ -18,11 +18,26 @@ For our project, we created a QR code generator and scanner with the help of
 system to identify certain QR codes and decrypt them using zebra crossing. Of
 course, NyARToolkit is capable of much more than simply recognizing markers. We
 wished to further develop this project by creating a system of augmented reality
-using QR codes as markers themselves.
+using modified QR codes (or AR codes) as markers themselves.
 
-The project has two main parts, the scanner/renderer of QR codes (developed
-mostly by Yicheng and Jake) and the generator of QR codes (developped mostly by
+Currently, augmented reality markers must be hard coded into the recognition
+system. So it is very had for users to create their own markers without
+knowledge about programming. However, if we use these AR codes as general marker
+templates, anyone can create augmented reality marker without knowledge of
+programming.
+
+The project has two main parts, the scanner/renderer of AR codes (developed
+mostly by Yicheng and Jake) and the generator of AR codes (developped mostly by
 Ari and Joseph).
+
+## Future Development
+However, currently, the AR codes are just plain QR codes so it is not yet
+particularly useful. However, it is worth noting that QR code can have non-qr
+section built in. We may put a picture inside the AR code and make it render the
+word, which would be a useful tool for child learning.
+
+We can/probably will also port the project to android so that it can be used on
+a mobile platform.
 
 # Instructions to Run
 
